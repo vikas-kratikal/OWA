@@ -1,0 +1,139 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threat Alert Button</title>
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="assets/jquery.min.js"></script>
+    <!-- <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script> -->
+    <!-- <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.min.js"></script> -->
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet"
+        href="assets/css/fabric.min.css" />
+    <!-- Template styles -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <!-- Page Loader Starts -->
+    <div class="page-loader d-none">
+        <div class="text-center w-100 loader-add">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <h5 style="color:#ffffff;" id="loadingText"></h5>
+        </div>
+    </div>
+    <!-- Page Loader Ends -->
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <a href="https://app.threatalertbutton.com/login"><img width="130" src="assets/logo-filled.png" alt="Contoso"
+                title="Contoso" /></a>
+        <h1 class="ms-font-su">Welcome to Threat Alert Button reporting tool.</h1>
+    </header>
+    <section id="main-wrap">
+        <!-- Block 1 -->
+        <main id="app-body" class="ms-welcome__main">
+            <!-- <button type="button" class="btn-hack" id="hackRecord"> Hack Record</button> -->
+            <div class="btn-wrap">
+                <button type="button" class="btn btn-hack" id="back" style="display: none;" data-toggle="tooltip"
+                    data-placement="top" title="Back"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-hack mx-2" onclick="showHackRecord()" id="hackRecord"
+                    data-toggle="tooltip" data-placement="top" title="Click to see hack records" style="display: none;">My Hack Record</button>
+                <button type="button" class="btn btn-hack" id="refresh" data-toggle="tooltip" data-placement="top"
+                    title="Refresh" style="display: none;">
+                    <!-- <i class="fa fa-refresh" aria-hidden="true"></i> -->
+                    <span class="material-icons" style="width: 30px;">sync</span>
+                </button>
+            </div>
+            <h1 class="ms-font-su" id="hacksafe" style="color: #3d923F; font-weight: 600;display: none">You are safe.
+                Your Email was never Hacked.</h1>
+            <!-- <h1 class="ms-font-su" id="error-message" style="color: red; font-weight: 600;display: none"></h1> -->
+            <div id="error-message" class="alert alert-danger" role="alert" style="margin-top:20px;display: none;">
+
+            </div>
+            <div id="display-message" class="alert alert-primary" role="alert" style="margin-top:20px;display: none;">
+
+            </div>
+        </main>
+
+        <!-- -------Table Block--------- -->
+        <main id="analysis" class="ms-welcome__main" style="display: block;">
+            <div class="chart-wrap">
+                <h5>Score</h5>
+                <input class="knob" id='graph' data-width="150" data-height="150" data-bgColor="#ececec"
+                    data-fgColor="#306899" readonly value="0">
+            </div>
+            <div class="text-center">
+                <h2 class="ms-font-xl" id="mark-spam" style="display: none;color: #141415;font-weight: 600; "> You have
+                    reported the mail as Spam!</h2>
+                <h2 class="ms-font-xl" id="mark-ham" style="display: none;color: #141415;font-weight: 600;"> You have
+                    reported the mail as Not Spam!</h2>
+                <ul id="scanMailAttachment"></ul>
+                <button type="button" class="btn btn-danger round-btn mr-2" id="run"
+                    style="display: none;margin-left: 10px;">Report Mail</button>
+                <button type="button" class="btn btn-success round-btn" id="ham" style="display: none;">Not
+                    Spam</button>
+            </div>
+            <div class="table-block mt-4">
+                <table class="table table-bordered" id="anaytics">
+                </table>
+            </div>
+        </main>
+        <main id="app-body" class="ms-welcome__main">
+        </main>
+        <main id="analysis" class="ms-welcome__main">
+            <div class="table-wrap" id='analysis-data'>
+            </div>
+            <div class="table-responsive" style="display: none;" id="hackRecordTable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Breach Date</th>
+                            <th><i class="fa fa-info-circle" aria-hidden="true"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="records">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <!-- Block 2 -->
+        <main id="sideload-msg" class="ms-welcome__main" style="display: none;">
+            <img width="110" style="margin-top: 20px;" src="assets/tick.png" alt="Contoso" title="Contoso" />
+            <h2 class="ms-font-xl" id="textbox"> Thank You Your mail has been reported successfully !</h2>
+        </main>
+        <main id="warning" class="ms-welcome__main" style="display: none;">
+            <img width="110" style="margin-top: 20px;" src="assets/warning.png" alt="Contoso" title="Contoso" />
+            <h2 class="ms-font-xl" id="textbox"> Sorry <br> Please Retry to Report Email</h2>
+        </main>
+    </section>
+    <script src="assets/jquery-3.3.1.min.js"></script>
+    <script src="assets/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="assets/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="assets/parser.min.js"></script>
+    <script type="text/javascript" src="assets/easyEws.js"></script>
+    <script type="text/javascript" src="assets/easyEws.min.js"></script>
+    <script type="text/javascript" src="assets/excanvas.js"></script>
+    <script type="text/javascript" src="assets/jquery.knob.min.js"></script>
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+
+</html>

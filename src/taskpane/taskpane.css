@@ -1,0 +1,269 @@
+/* 
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
+
+html,
+body {
+  width: 100%;
+  /* height: 100%; */
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+#reportMail li {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+}
+.ms-welcome__header {
+  padding: 30px 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ms-welcome__main {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
+  padding: 10px 20px;
+}
+
+.ms-welcome__main>h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.ms-welcome__features {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+.ms-welcome__features.ms-List .ms-ListItem {
+  padding-bottom: 20px;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.ms-welcome__features.ms-List .ms-ListItem>.ms-Icon {
+  margin-right: 10px;
+}
+
+.ms-welcome__action.ms-Button--hero {
+  background: #862d3b;
+  padding: 5px 40px 7px 40px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.ms-Button.ms-Button--hero .ms-Button-label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.ms-welcome__action.ms-Button--hero.btn-outline {
+  border: 1px solid rgb(172, 109, 122) !important;
+  background: rgba(134, 45, 59, 0.67) !important;
+  margin-left: 5px;
+}
+
+.ms-welcome__action.ms-Button--hero.btn-outline .ms-Button-label {
+  color: #fff;
+}
+
+.ms-Button.ms-Button--hero:hover .ms-Button-label,
+.ms-Button.ms-Button--hero:focus .ms-Button-label {
+  color: #005a9e;
+  cursor: pointer;
+}
+
+b {
+  font-weight: bold;
+}
+
+.ms-bgColor-neutralLighter,
+.ms-bgColor-neutralLighter--hover:hover {
+  background-color: #862D3B;
+}
+
+
+.ms-font-su {
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  margin: 14px 0px;
+}
+
+
+
+.page-loader {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  /* background: #00000078; */
+  padding-top: 25%;
+  background: #000000c2;
+  overflow-y: hidden;
+}
+
+.loader-add{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.spinner-border {
+  border: .25em solid white;
+  border-right-color: transparent !important;
+}
+
+.ms-inline-btn {
+  display: flex;
+}
+
+.ms-welcome__action.ms-Button--mid {
+  padding: 5px 0px 10px 0px;
+  margin: 0px 5px;
+  width: 75px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.ms-Button.ms-Button--mid .ms-Button-label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+
+.ms-welcome__main .col-sm-2 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+.ms-font-xl {
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+
+.chart-wrap {
+
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+
+.chart-wrap h5 {
+  color: #484646;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  font-size: 12px !important;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  font-weight: 600;
+
+}
+
+.badge-pass {
+  border: 1px solid rgba(16, 196, 105, .2) !important;
+  background-color: rgba(16, 196, 105, .25) !important;
+  color: #10c469 !important;
+  border-radius: 4px !important;
+}
+
+.badge-fail {
+  border: 1px solid rgba(255, 91, 91, .2) !important;
+  background-color: rgba(255, 91, 91, .25) !important;
+  color: #ff5b5b !important;
+  border-radius: 4px !important;
+}
+
+.info-btn {
+  background: none;
+  border: none;
+}
+
+.btn-hack {
+  float: right;
+  background: #862d3b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-hack:hover {
+  color: #fff;
+}
+
+button:focus {
+  outline: none;
+}
+
+.btn-wrap {
+  display: flex;
+  /* width: 100%;
+  justify-content: space-between; */
+}
+
+.btn {
+  font-size: 14px;
+  padding: 5px 12px;
+
+}
+
+.round-btn {
+  border-radius: 20px;
+  width: 110px;
+  text-align: center;
+
+}
+
+.btn-secondary {
+  background-color: rgba(38, 58, 91, 0.1);
+  border: none;
+  color: #263a5b;
+}
+
+.btn-secondary:hover {
+  background-color: #263a5b;
+  border: none;
+  color: #ffffff;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
