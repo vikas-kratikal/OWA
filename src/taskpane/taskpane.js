@@ -122,8 +122,9 @@ function getDataFromMail() {
     let attachments = Office.context.mailbox.item.attachments;
     console.log('attachment => ', attachments);
     attachments.forEach((el)=>{
-        $('#scanMailAttachment').append(`<li><p>${el.name}<p> <button id=${el.id} class="btn btn-primary">Scan</button></li>`)
-        document.getElementById(`${el.id}`).onclick = scanAttachment;
+        let restAttachmentId = Office.context.mailbox.convertToRestId(el.id, Office.MailboxEnums.RestVersion.v2_0);
+        $('#scanMailAttachment').append(`<li><p>${el.name}<p> <button id=${restAttachmentId} class="btn btn-primary">Scan</button></li>`)
+        document.getElementById(`${restAttachmentId}`).onclick = scanAttachment;
     })
 
     getMailHeaders(function (rawHeader) {
@@ -155,7 +156,6 @@ function getMailHeaders(callback) {
 function reportSpam() {
     console.log('reportSpam called from taskpane.js');
     let data = { from, to, subject, mailId, header, authToken }
-    mailId='';
     console.log('reportSpam => ', data);
     if (from && to && subject && mailId && header && authToken) {
         console.log('inside if');
@@ -191,7 +191,6 @@ function reportSpam() {
 function attachmentScan(attachID) {
     console.log('attachmentScan called from taskpane.js');
     let data = { mailId, authToken }
-    mailId='';
     console.log('reportSpam => ',attachID);
     if ( attachID && mailId && authToken) {
         console.log('inside if');
